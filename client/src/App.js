@@ -3,46 +3,46 @@ import './App.css';
 import Axios from 'axios';
 
 function App() {
-  const [movieName, setMovieName] = useState('');
-  const [review, setReview] = useState('');
-  const [movieReviewList, setMovieList] = useState([]);
+  const [fullname, setFullname] = useState('');
+  const [amount, setAmount] = useState('');
+  const [amountList, setAmountList] = useState([]);
 
-  const [newReview, setNewReview] = useState('');
+  const [newAmount, setNewAmount] = useState('');
 
   useEffect(() => {
     Axios.get('http://localhost:3001/api/get').then((response) => {
-      setMovieList(response.data);
+      setAmountList(response.data);
     });
   }, []);
 
-  const submitReview = () => {
+  const submitAmount = () => {
     Axios.post('http://localhost:3001/api/insert', {
-      movieName: movieName,
-      movieReview: review,
+      fullname: fullname,
+      amount: amount,
     });
 
-    setMovieList([
-      ...movieReviewList,
-      { movieName: movieName, movieReview: review },
+    setAmountList([
+      ...amountList,
+      { fullname: fullname, amount: amount },
     ]);
   };
 
-  const deleteReview = (movie) => {
-    Axios.delete(`http://localhost:3001/api/delete/${movie}`);
+  const deleteAmount = (fullname) => {
+    Axios.delete(`http://localhost:3001/api/delete/${fullname}`);
 
     Axios.get('http://localhost:3001/api/get').then((response) => {
-      setMovieList(response.data);
+      setAmountList(response.data);
     });
   };
 
-  const updateReview = (movie) => {
+  const updateAmount = (fullname) => {
     Axios.put('http://localhost:3001/api/update', {
-      movieName: movie,
-      movieReview: newReview,
+      fullname: fullname,
+      amount: newAmount,
     });
-    setNewReview('');
+    setNewAmount('');
     Axios.get('http://localhost:3001/api/get').then((response) => {
-      setMovieList(response.data);
+      setAmountList(response.data);
     });
   };
 
@@ -51,36 +51,36 @@ function App() {
       <h1>CRUD APPLICATION</h1>
 
       <div className='form'>
-        <label>Movie Name:</label>
+        <label>Full Name:</label>
         <input
           type='text'
-          name='movieName'
-          placeholder='Movie Name'
+          name='fullname'
+          placeholder='Full Name'
           onChange={(e) => {
-            setMovieName(e.target.value);
+            setFullname(e.target.value);
           }}
         />
-        <label>Review:</label>
+        <label>Amount:</label>
         <input
           type='text'
-          name='review'
-          placeholder='Review'
+          name='amount'
+          placeholder='Billable Amount'
           onChange={(e) => {
-            setReview(e.target.value);
+            setAmount(e.target.value);
           }}
         />
-        <button onClick={submitReview}>Submit</button>
+        <button onClick={submitAmount}>Submit</button>
         <br />
         ..............................
-        {movieReviewList.map((val) => {
+        {amountList.map((val) => {
           return (
             <div className='card'>
-              <h2>{val.movieName}</h2>
-              <p>{val.movieReview}</p>
+              <h2>{val.fullname}</h2>
+              <p>${val.amount}</p>
 
               <button
                 onClick={() => {
-                  deleteReview(val.movieName);
+                  deleteAmount(val.fullname);
                 }}
               >
                 Delete
@@ -88,17 +88,17 @@ function App() {
               <input
                 type='text'
                 id='updateInput'
-                placeholder='Update'
+                placeholder='Update Amount'
                 onChange={(e) => {
-                  setNewReview(e.target.value);
+                  setNewAmount(e.target.value);
                 }}
               />
               <button
                 onClick={() => {
-                  updateReview(val.movieName);
+                  updateAmount(val.fullname);
                 }}
               >
-                Update
+              Update
               </button>
             </div>
           );
