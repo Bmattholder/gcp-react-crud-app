@@ -1,11 +1,23 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const app = express();
-const mysql = require('mysql');
+// Import express
+const express = require('express'); 
 
-app.use(cors());
-app.use(express.json());
+// for parsing the body of the request
+const bodyParser = require('body-parser'); 
+
+/* Cross-Origin Resource Sharing - middleware for Express. 
+Allows you to share data with a different origin. */
+const cors = require('cors'); 
+
+// create our app
+const app = express(); 
+// import the mysql module
+const mysql = require('mysql'); 
+
+// use the cors middleware
+app.use(cors()); 
+// use the body parser middleware
+app.use(express.json()); 
+
 
 const db = mysql.createConnection({
   host: 'localhost',
@@ -14,18 +26,22 @@ const db = mysql.createConnection({
   database: 'cinch-billing',
 });
 
-app.use(bodyParser.urlencoded({ extended: true }));
+// for parsing application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true })); 
+
 
 // Routes
 
-app.get('/api/get', (req, res) => {
+// get all customers
+app.get('/api/get', (req, res) => { 
   const sqlSelect = 'SELECT * FROM client_data';
   db.query(sqlSelect, (err, result) => {
     res.send(result);
   });
 });
 
-app.post('/api/insert', (req, res) => {
+// Post to the db.  req.body is the data sent in the request
+app.post('/api/insert', (req, res) => { 
   const fullname = req.body.fullname;
   const amount = req.body.amount;
 
@@ -39,8 +55,9 @@ app.post('/api/insert', (req, res) => {
     }
   });
 });
-
-app.delete('/api/delete/:fullname', (req, res) => {
+ 
+// :fullname is a placeholder for the id
+app.delete('/api/delete/:fullname', (req, res) => { 
   const fullname = req.params.fullname;
   const sqlDelete = 'DELETE FROM client_data WHERE fullname = ?';
 
@@ -51,13 +68,14 @@ app.delete('/api/delete/:fullname', (req, res) => {
   });
 });
 
-app.put('/api/update', (req, res) => {
+// update the amount of a client
+app.put('/api/update', (req, res) => { 
   const fullname = req.body.fullname;
   const amount = req.body.amount;
   const sqlUpdate =
     'UPDATE client_data SET amount = ? WHERE fullname = ?';
 
-  db.query(sqlUpdate, [amount, fullname], (err, result) => {
+  db.query(sqlUpdate, [amount, fullname], (err, result) => { 
     if (err) {
       console.log(err);
     }

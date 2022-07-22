@@ -3,12 +3,14 @@ import './App.css';
 import Axios from 'axios';
 
 function App() {
-  const [fullname, setFullname] = useState('');
+  // example: const [data, setData] = useState([]); data is an array of objects
+  const [fullname, setFullname] = useState(''); // setFullname is the state
   const [amount, setAmount] = useState('');
   const [amountList, setAmountList] = useState([]);
 
   const [newAmount, setNewAmount] = useState('');
 
+  // useEffect is a hook that runs after the component is rendered
   useEffect(() => {
     Axios.get('http://localhost:3001/api/get').then((response) => {
       setAmountList(response.data);
@@ -21,10 +23,7 @@ function App() {
       amount: amount,
     });
 
-    setAmountList([
-      ...amountList,
-      { fullname: fullname, amount: amount },
-    ]);
+    setAmountList([...amountList, { fullname: fullname, amount: amount }]);
   };
 
   const deleteAmount = (fullname) => {
@@ -98,7 +97,7 @@ function App() {
                   updateAmount(val.fullname);
                 }}
               >
-              Update
+                Update
               </button>
             </div>
           );
