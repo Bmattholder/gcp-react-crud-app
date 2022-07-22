@@ -11,7 +11,7 @@ const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: 'Password1!',
-  database: 'CRUDDataBase',
+  database: 'cinch-billing',
 });
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -19,19 +19,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Routes
 
 app.get('/api/get', (req, res) => {
-  const sqlSelect = 'SELECT * FROM movie_reviews';
+  const sqlSelect = 'SELECT * FROM client_data';
   db.query(sqlSelect, (err, result) => {
     res.send(result);
   });
 });
 
 app.post('/api/insert', (req, res) => {
-  const movieName = req.body.movieName;
-  const movieReview = req.body.movieReview;
+  const fullname = req.body.fullname;
+  const amount = req.body.amount;
 
   const sqlInsert =
-    'INSERT INTO movie_reviews (movieName, movieReview) VALUES (?, ?)';
-  db.query(sqlInsert, [movieName, movieReview], (err, result) => {
+    'INSERT INTO client_data (fullname, amount) VALUES (?, ?)';
+  db.query(sqlInsert, [fullname, amount], (err, result) => {
     if (err) {
       console.log(err);
     } else {
@@ -40,11 +40,11 @@ app.post('/api/insert', (req, res) => {
   });
 });
 
-app.delete('/api/delete/:movieName', (req, res) => {
-  const name = req.params.movieName;
-  const sqlDelete = 'DELETE FROM movie_reviews WHERE movieName = ?';
+app.delete('/api/delete/:fullname', (req, res) => {
+  const fullname = req.params.fullname;
+  const sqlDelete = 'DELETE FROM client_data WHERE fullname = ?';
 
-  db.query(sqlDelete, name, (err, result) => {
+  db.query(sqlDelete, fullname, (err, result) => {
     if (err) {
       console.log(err);
     }
@@ -52,12 +52,12 @@ app.delete('/api/delete/:movieName', (req, res) => {
 });
 
 app.put('/api/update', (req, res) => {
-  const name = req.body.movieName;
-  const review = req.body.movieReview;
+  const fullname = req.body.fullname;
+  const amount = req.body.amount;
   const sqlUpdate =
-    'UPDATE movie_reviews SET movieReview = ? WHERE movieName = ?';
+    'UPDATE client_data SET amount = ? WHERE fullname = ?';
 
-  db.query(sqlUpdate, [review, name], (err, result) => {
+  db.query(sqlUpdate, [amount, fullname], (err, result) => {
     if (err) {
       console.log(err);
     }
