@@ -187,8 +187,8 @@ function App() {
         {amountList.map((val) => {
           return (
             <div className='card'>
-              <h2>Name: {val.fullname}</h2>
-              <h3>ID: {val.ID}</h3>
+              <h2>ID: {val.ID}</h2>
+              <h3>Name: {val.fullname}</h3>
               <p>Total: ${val.amount}</p>
               <p>Street Address: {val.street_address}</p>
               <p>City: {val.city}</p>

@@ -83,38 +83,22 @@ app.post('/api/insert', (req, res) => {
 app.put('/api/update', (req, res) => {
   const fullname = req.body.fullname;
   const amount = req.body.amount;
-  const id = req.body.ID;
-  const streetAddress = req.body.street_address;
-  const city = req.body.city;
-  const state = req.body.state;
-  const zip = req.body.zip;
-  const email = req.body.email;
-  const paid = req.body.paid;
-  const dueDate = req.body.dueDate;
-  const pastDue = req.body.pastDue;
-  const sqlUpdate = `UPDATE client_data SET(amount, fullname, street_address, city, state, zip, email, paid, due_date, past_due) VALUES ('${fullname}', '${amount}', '${id}', '${streetAddress}', '${city}', '${state}', '${zip}', '${email}', '${paid}', '${dueDate}', '${pastDue}')`;
+  // const id = req.body.ID;
+  // const streetAddress = req.body.street_address;
+  // const city = req.body.city;
+  // const state = req.body.state;
+  // const zip = req.body.zip;
+  // const email = req.body.email;
+  // const paid = req.body.paid;
+  // const dueDate = req.body.dueDate;
+  // const pastDue = req.body.pastDue;
+  const sqlUpdate = `UPDATE client_data SET amount = ? WHERE fullname = ?`;
 
-  db.query(
-    sqlUpdate,
-    [
-      amount,
-      fullname,
-      id,
-      streetAddress,
-      city,
-      state,
-      zip,
-      email,
-      paid,
-      dueDate,
-      pastDue,
-    ],
-    (err, result) => {
-      if (err) {
-        console.log(err);
-      }
+  db.query(sqlUpdate, [amount, fullname], (err, result) => {
+    if (err) {
+      console.log(err);
     }
-  );
+  });
 });
 
 app.delete(`/api/delete/:client_id`, (req, res) => {
