@@ -62,15 +62,6 @@ function App() {
     Axios.put('http://localhost:3001/api/update', {
       fullname: fullname,
       amount: newAmount,
-      id: id,
-      streetAddress: streetAddress,
-      city: city,
-      state: state,
-      zip: zip,
-      email: email,
-      paid: paid,
-      dueDate: dueDate,
-      pastDue: pastDue,
     });
     setNewAmount('');
     Axios.get('http://localhost:3001/api/get').then((response) => {
