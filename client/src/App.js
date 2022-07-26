@@ -45,7 +45,7 @@ function App() {
       {
         fullname: fullname,
         amount: amount,
-        id: id,
+        ID: id,
         street_address: streetAddress,
         city: city,
         state: state,
@@ -195,7 +195,7 @@ function App() {
               <p>Email: {val.email}</p>
               <p>Paid? {val.paid}</p>
               <p>Due Date: {val.due_date}</p>
-              <p>Past Due? </p>
+              <p>Past Due? {val.past_due}</p>
               <button
                 onClick={() => {
                   deleteAmount(val.id);
