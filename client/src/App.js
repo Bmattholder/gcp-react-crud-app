@@ -7,8 +7,17 @@ function App() {
   const [fullname, setFullname] = useState(''); // setFullname is the state
   const [amount, setAmount] = useState('');
   const [amountList, setAmountList] = useState([]);
-
   const [newAmount, setNewAmount] = useState('');
+  const [id, setId] = useState('');
+  const [streetAddress, setStreetAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [zip, setZip] = useState('');
+  const [email, setEmail] = useState('');
+  const [paid, setPaid] = useState('');
+  const [dueDate, setDueDate] = useState('');
+  const [pastDue, setPastDue] = useState('');
+
 
   // useEffect is a hook that runs after the component is rendered
   useEffect(() => {
