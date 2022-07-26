@@ -58,14 +58,6 @@ function App() {
     ]);
   };
 
-  const deleteAmount = (id) => {
-    Axios.delete(`http://localhost:3001/api/delete/${id}`);
-
-    Axios.get('http://localhost:3001/api/get').then((response) => {
-      setAmountList(response.data);
-    });
-  };
-
   const updateAmount = (fullname) => {
     Axios.put('http://localhost:3001/api/update', {
       fullname: fullname,
@@ -84,6 +76,16 @@ function App() {
     Axios.get('http://localhost:3001/api/get').then((response) => {
       setAmountList(response.data);
     });
+  };
+
+  const deleteClient = (client_id) => {
+    Axios.delete(`http://localhost:3001/api/delete/${client_id}`).then(
+      (response) => {
+        Axios.get('http://localhost:3001/api/get').then((response) => {
+          setAmountList(response.data);
+        });
+      }
+    );
   };
 
   return (
@@ -185,8 +187,8 @@ function App() {
         {amountList.map((val) => {
           return (
             <div className='card'>
-              <h2>Name: {val.fullname}</h2>
-              <h3>ID: {val.ID}</h3>
+              <h2>ID: {val.ID}</h2>
+              <h3>Name: {val.fullname}</h3>
               <p>Total: ${val.amount}</p>
               <p>Street Address: {val.street_address}</p>
               <p>City: {val.city}</p>
@@ -198,7 +200,7 @@ function App() {
               <p>Past Due? {val.past_due}</p>
               <button
                 onClick={() => {
-                  deleteAmount(val.id);
+                  deleteClient(val.ID);
                 }}
               >
                 Delete
