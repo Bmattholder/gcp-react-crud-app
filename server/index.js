@@ -117,13 +117,14 @@ app.put('/api/update', (req, res) => {
   );
 });
 
-app.delete('/api/delete/:id', (req, res) => {
-  const id = req.params.ID;
-  const sqlDelete = `DELETE FROM client_data WHERE ID = ${id}`;
+app.delete(`/api/delete/:client_id`, (req, res) => {
+  const id = req.params.client_id;
 
-  db.query(sqlDelete, id, (err, result) => {
+  db.query(`DELETE FROM client_data WHERE ID = ?`, id, (err, result) => {
     if (err) {
       console.log(err);
+    } else {
+      res.send(result);
     }
   });
 });

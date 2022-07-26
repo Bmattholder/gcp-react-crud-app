@@ -58,14 +58,6 @@ function App() {
     ]);
   };
 
-  const deleteAmount = (id) => {
-    Axios.delete(`http://localhost:3001/api/delete/${id}`);
-
-    Axios.get('http://localhost:3001/api/get').then((response) => {
-      setAmountList(response.data);
-    });
-  };
-
   const updateAmount = (fullname) => {
     Axios.put('http://localhost:3001/api/update', {
       fullname: fullname,
@@ -84,6 +76,16 @@ function App() {
     Axios.get('http://localhost:3001/api/get').then((response) => {
       setAmountList(response.data);
     });
+  };
+
+  const deleteClient = (client_id) => {
+    Axios.delete(`http://localhost:3001/api/delete/${client_id}`).then(
+      (response) => {
+        Axios.get('http://localhost:3001/api/get').then((response) => {
+          setAmountList(response.data);
+        });
+      }
+    );
   };
 
   return (
@@ -198,7 +200,7 @@ function App() {
               <p>Past Due? {val.past_due}</p>
               <button
                 onClick={() => {
-                  deleteAmount(val.id);
+                  deleteClient(val.ID);
                 }}
               >
                 Delete
