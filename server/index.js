@@ -92,13 +92,18 @@ app.put('/api/update', (req, res) => {
   // const paid = req.body.paid;
   // const dueDate = req.body.dueDate;
   // const pastDue = req.body.pastDue;
-  const sqlUpdate = `UPDATE client_data SET amount = ? WHERE fullname = ?`;
 
-  db.query(sqlUpdate, [amount, fullname], (err, result) => {
-    if (err) {
-      console.log(err);
+  db.query(
+    `UPDATE client_data SET amount = ? WHERE fullname = ?`,
+    [amount, fullname],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
     }
-  });
+  );
 });
 
 app.delete(`/api/delete/:client_id`, (req, res) => {
