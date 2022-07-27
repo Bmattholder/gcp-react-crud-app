@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Axios from 'axios';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 function App() {
   // example: const [data, setData] = useState([]); data is an array of objects
@@ -84,136 +86,163 @@ function App() {
       <h1>Cinch Billing</h1>
 
       <div className='form'>
-        <input
-          type='text'
-          name='id'
-          placeholder='ID'
-          onChange={(e) => {
-            setId(e.target.value);
-          }}
-        />
-        <input
-          type='text'
-          name='fullname'
-          placeholder='Full Name'
-          onChange={(e) => {
-            setFullname(e.target.value);
-          }}
-        />
-        <input
-          type='text'
-          name='amount'
-          placeholder='Billable Amount'
-          onChange={(e) => {
-            setAmount(e.target.value);
-          }}
-        />
-        <input
-          type='text'
-          name='street address'
-          placeholder='Street Address'
-          onChange={(e) => {
-            setStreetAddress(e.target.value);
-          }}
-        />
-        <input
-          type='text'
-          name='city'
-          placeholder='City'
-          onChange={(e) => {
-            setCity(e.target.value);
-          }}
-        />
-        <input
-          type='text'
-          name='state'
-          placeholder='State'
-          onChange={(e) => {
-            setState(e.target.value);
-          }}
-        />
-        <input
-          type='text'
-          name='zip'
-          placeholder='Zip'
-          onChange={(e) => {
-            setZip(e.target.value);
-          }}
-        />
-        <input
-          type='text'
-          name='email'
-          placeholder='Email'
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-        />
-        <input
-          type='text'
-          name='paid'
-          placeholder='Paid'
-          onChange={(e) => {
-            setPaid(e.target.value);
-          }}
-        />
-        <input
-          type='text'
-          name='dueDate'
-          placeholder='Due Date'
-          onChange={(e) => {
-            setDueDate(e.target.value);
-          }}
-        />
-        <input
-          type='text'
-          name='pastDue'
-          placeholder='Past Due'
-          onChange={(e) => {
-            setPastDue(e.target.value);
-          }}
-        />
-        <button onClick={submitAmount}>Submit</button>
+        <div className='form-style'>
+          <input
+            type='number'
+            min='1'
+            name='id'
+            required
+            placeholder='ID'
+            onChange={(e) => {
+              setId(e.target.value);
+            }}
+          />
+          <input
+            type='text'
+            name='fullname'
+            required
+            placeholder='Full Name'
+            onChange={(e) => {
+              setFullname(e.target.value);
+            }}
+          />
+          <input
+            type='number'
+            min='1'
+            name='amount'
+            required
+            placeholder='Billable Amount'
+            onChange={(e) => {
+              setAmount(e.target.value);
+            }}
+          />
+          <input
+            type='text'
+            name='street address'
+            required
+            placeholder='Street Address'
+            onChange={(e) => {
+              setStreetAddress(e.target.value);
+            }}
+          />
+          <input
+            type='text'
+            name='city'
+            required
+            placeholder='City'
+            onChange={(e) => {
+              setCity(e.target.value);
+            }}
+          />
+          <input
+            type='text'
+            name='state'
+            required
+            placeholder='State'
+            onChange={(e) => {
+              setState(e.target.value);
+            }}
+          />
+          <input
+            type='number'
+            min='11111'
+            name='zip'
+            required
+            placeholder='Zip'
+            onChange={(e) => {
+              setZip(e.target.value);
+            }}
+          />
+          <input
+            type='email'
+            name='email'
+            required
+            placeholder='Email'
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
+          <input
+            type='boolean'
+            name='paid'
+            required
+            placeholder='Paid'
+            onChange={(e) => {
+              setPaid(e.target.value);
+            }}
+          />
+          <input
+            type='text'
+            name='dueDate'
+            required
+            placeholder='Due Date'
+            onChange={(e) => {
+              setDueDate(e.target.value);
+            }}
+          />
+          <input
+            type='boolean'
+            name='pastDue'
+            required
+            placeholder='Past Due'
+            onChange={(e) => {
+              setPastDue(e.target.value);
+            }}
+          />{' '}
+          <br />
+          <Button type='submit' onClick={submitAmount}>
+            Submit
+          </Button>
+        </div>
         <br />
         ..............................
-        {amountList.map((val) => {
-          return (
-            <div className='card'>
-              <h2>ID: {val.ID}</h2>
-              <h3>Name: {val.fullname}</h3>
-              <p>Total: ${val.amount}</p>
-              <p>Street Address: {val.street_address}</p>
-              <p>City: {val.city}</p>
-              <p>State: {val.state}</p>
-              <p>Zip: {val.zip}</p>
-              <p>Email: {val.email}</p>
-              <p>Paid? {val.paid}</p>
-              <p>Due Date: {val.due_date}</p>
-              <p>Past Due? {val.past_due}</p>
-              <button
-                onClick={() => {
-                  deleteClient(val.ID);
-                }}
-              >
-                Delete
-              </button>
-              <input
-                type='text'
-                id='updateInput'
-                placeholder='Update Amount'
-                onChange={(e) => {
-                  setNewAmount(e.target.value);
-                }}
-              />
-              <button
-                onClick={() => {
-                  updateAmount(val.fullname);
-                }}
-              >
-                Update
-              </button>
-            </div>
-          );
-        })}
+        {amountList
+          .slice(0)
+          .reverse()
+          .map((val) => {
+            return (
+              <div className='Card'>
+                <h2>ID: {val.ID}</h2>
+                <p>Name: {val.fullname}</p>
+                <p>Total Owed: ${val.amount}</p>
+                <p>Street Address: {val.street_address}</p>
+                <p>City: {val.city}</p>
+                <p>State: {val.state}</p>
+                <p>Zip: {val.zip}</p>
+                <p>Email: {val.email}</p>
+                <p>Paid? {val.paid}</p>
+                <p>Due Date: {val.due_date}</p>
+                <p>Past Due? {val.past_due}</p>
+
+                <button
+                  type='button'
+                  class='btn btn-success'
+                  onClick={() => {
+                    updateAmount(val.fullname);
+                  }}
+                >
+                  Update
+                </button>
+                <input
+                  type='number'
+                  id='updateInput'
+                  placeholder='New Amt'
+                  onChange={(e) => {
+                    setNewAmount(e.target.value);
+                  }}
+                />
+                <button
+                  type='button'
+                  class='btn btn-danger'
+                  onClick={() => {
+                    deleteClient(val.ID);
+                  }}
+                >
+                  Delete
+                </button>
+              </div>
+            );
+          })}
       </div>
     </div>
   );
