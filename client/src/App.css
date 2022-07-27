@@ -1,7 +1,12 @@
+h1 {
+  color: #fff;
+}
+
 .App {
   text-align: center;
   align-items: center;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  background-color: #15202B;
 }
 
 .form{
@@ -11,26 +16,42 @@
   justify-content: center;
   width: 100%;
   height: 100%;
+  
 }
 
 .form input{
   width: 33%;
   margin: 10px;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid black;
   border-radius: 5px;
 }
 
-.card {
+.form-style{
+  width: 33%;
+  margin: 10px;
+  padding: 10px;
+  border: 2px solid rgb(24, 22, 22);
+  border-radius: 5px;
+  background-color: #203142
+}
+
+.Card {
   width: 500px;
   border: 2px solid black;
   border-radius: 15px;
   margin: 10px;
   align-items: center;
+  color: #fff;
+  background-color: #203142;
+}
+
+.form-style:hover, .Card:hover {
+  box-shadow: 0 0 10px #2b2d2e;
 }
 
 #updateInput{
   width: 100px;
-  height: 10px;
+  height: 20px;
   border-radius: 5px;
 }
