@@ -216,12 +216,12 @@ function App() {
 
                 <button
                   type='button'
-                  class='btn btn-success'
+                  class='btn btn-danger'
                   onClick={() => {
-                    updateAmount(val.fullname);
+                    deleteClient(val.ID);
                   }}
                 >
-                  Update
+                  Delete
                 </button>
                 <input
                   type='number'
@@ -233,13 +233,14 @@ function App() {
                 />
                 <button
                   type='button'
-                  class='btn btn-danger'
+                  class='btn btn-success'
                   onClick={() => {
-                    deleteClient(val.ID);
+                    updateAmount(val.fullname);
                   }}
                 >
-                  Delete
+                  Update
                 </button>
+                <br />
               </div>
             );
           })}

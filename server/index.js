@@ -20,6 +20,7 @@ app.use(express.json());
 
 const db = mysql.createConnection({
   host: 'localhost',
+  // 34.170.203.139
   user: 'root',
   password: 'Password1!',
   database: 'cinch-billing',
