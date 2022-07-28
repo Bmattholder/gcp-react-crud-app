@@ -31,7 +31,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Routes
 
 // get all customers
-app.get('/api/get', (req, res) => {
+app.get('34.170.203.139/get', (req, res) => {
   const sqlSelect = 'SELECT * FROM client_data';
   db.query(sqlSelect, (err, result) => {
     res.send(result);
@@ -39,7 +39,7 @@ app.get('/api/get', (req, res) => {
 });
 
 // Post to the db.  req.body is the data sent in the request
-app.post('/api/insert', (req, res) => {
+app.post('34.170.203.139/insert', (req, res) => {
   const fullname = req.body.fullname;
   const amount = req.body.amount;
   const id = req.body.ID;
@@ -80,7 +80,7 @@ app.post('/api/insert', (req, res) => {
 });
 
 // update the amount of a client
-app.put('/api/update', (req, res) => {
+app.put('34.170.203.139/update', (req, res) => {
   const fullname = req.body.fullname;
   const amount = req.body.amount;
   // const id = req.body.ID;
@@ -106,7 +106,7 @@ app.put('/api/update', (req, res) => {
   );
 });
 
-app.delete(`/api/delete/:client_id`, (req, res) => {
+app.delete(`34.170.203.139/delete/:client_id`, (req, res) => {
   const id = req.params.client_id;
 
   db.query(`DELETE FROM client_data WHERE ID = ?`, id, (err, result) => {

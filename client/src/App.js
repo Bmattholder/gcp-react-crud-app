@@ -22,13 +22,13 @@ function App() {
 
   // useEffect is a hook that runs after the component is rendered
   useEffect(() => {
-    Axios.get('http://localhost:3001/api/get').then((response) => {
+    Axios.get('http://34.170.203.139/get').then((response) => {
       setAmountList(response.data);
     });
   }, []);
 
   const submitAmount = () => {
-    Axios.post('http://localhost:3001/api/insert', {
+    Axios.post('http://34.170.203.139/insert', {
       fullname: fullname,
       amount: amount,
       ID: id,
@@ -61,20 +61,20 @@ function App() {
   };
 
   const updateAmount = (fullname) => {
-    Axios.put('http://localhost:3001/api/update', {
+    Axios.put('http://34.170.203.139/update', {
       fullname: fullname,
       amount: newAmount,
     });
     setNewAmount('');
-    Axios.get('http://localhost:3001/api/get').then((response) => {
+    Axios.get('http://34.170.203.139/get').then((response) => {
       setAmountList(response.data);
     });
   };
 
   const deleteClient = (client_id) => {
-    Axios.delete(`http://localhost:3001/api/delete/${client_id}`).then(
+    Axios.delete(`http://34.170.203.139/delete/${client_id}`).then(
       (response) => {
-        Axios.get('http://localhost:3001/api/get').then((response) => {
+        Axios.get('http://34.170.203.139/get').then((response) => {
           setAmountList(response.data);
         });
       }

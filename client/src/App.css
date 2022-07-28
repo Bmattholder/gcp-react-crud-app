@@ -61,7 +61,7 @@ h1 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: fill;
+    width: stretch;
     height: 100%;
   }
 }
