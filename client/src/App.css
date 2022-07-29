@@ -45,7 +45,7 @@ h1 {
   color: #fff;
   background-color: #203142;
 }
-
+ 
 @media (max-width: 600px) {
   .form, .form input, .Card{
     display: flex;
