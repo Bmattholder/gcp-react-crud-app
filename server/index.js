@@ -32,7 +32,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // get all customers
 app.get('34.170.203.139/get', (req, res) => {
-  const sqlSelect = 'SELECT * FROM client_data';
+  const sqlSelect = 'SELECT * FROM cinch-billing';
   db.query(sqlSelect, (err, result) => {
     res.send(result);
   });
