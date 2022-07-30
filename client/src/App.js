@@ -22,13 +22,13 @@ function App() {
 
   // useEffect is a hook that runs after the component is rendered
   useEffect(() => {
-    Axios.get('http://34.170.203.139/get').then((response) => {
+    Axios.get('http://localhost:3001/api/get').then((response) => {
       setAmountList(response.data);
     });
   }, []);
 
   const submitAmount = () => {
-    Axios.post('http://34.170.203.139/insert', {
+    Axios.post('http://localhost:3001/api/insert', {
       fullname: fullname,
       amount: amount,
       ID: id,
@@ -61,20 +61,20 @@ function App() {
   };
 
   const updateAmount = (fullname) => {
-    Axios.put('http://34.170.203.139/update', {
+    Axios.put('http://localhost:3001/api/update', {
       fullname: fullname,
       amount: newAmount,
     });
     setNewAmount('');
-    Axios.get('http://34.170.203.139/get').then((response) => {
+    Axios.get('http://localhost:3001/api/get').then((response) => {
       setAmountList(response.data);
     });
   };
 
   const deleteClient = (client_id) => {
-    Axios.delete(`http://34.170.203.139/delete/${client_id}`).then(
+    Axios.delete(`http://localhost:3001/api/delete/${client_id}`).then(
       (response) => {
-        Axios.get('http://34.170.203.139/get').then((response) => {
+        Axios.get('http://localhost:3001/api/get').then((response) => {
           setAmountList(response.data);
         });
       }
@@ -195,16 +195,17 @@ function App() {
           </Button>
         </div>
         <br />
-        ..............................
         {amountList
           .slice(0)
           .reverse()
           .map((val) => {
             return (
               <div className='Card'>
-                <h2>ID: {val.ID}</h2>
-                <p>Name: {val.fullname}</p>
-                <p>Total Owed: ${val.amount}</p>
+                <br />
+                <h1>ID: {val.ID}</h1>
+                <hr />
+                <h2>Name: {val.fullname}</h2>
+                <h2>Total Owed: ${val.amount}</h2>
                 <p>Street Address: {val.street_address}</p>
                 <p>City: {val.city}</p>
                 <p>State: {val.state}</p>
@@ -213,6 +214,27 @@ function App() {
                 <p>Paid? {val.paid}</p>
                 <p>Due Date: {val.due_date}</p>
                 <p>Past Due? {val.past_due}</p>
+
+                
+                <input
+                  type='number'
+                  id='updateInput'
+                  placeholder='New Amount'
+                  onChange={(e) => {
+                    setNewAmount(e.target.value);
+                  }}
+                />
+                <br />
+                <button
+                  type='button'
+                  id='updateButton'
+                  class='btn btn-success'
+                  onClick={() => {
+                    updateAmount(val.fullname);
+                  }}
+                >
+                  Update
+                </button>
 
                 <button
                   type='button'
@@ -223,23 +245,8 @@ function App() {
                 >
                   Delete
                 </button>
-                <input
-                  type='number'
-                  id='updateInput'
-                  placeholder='New Amt'
-                  onChange={(e) => {
-                    setNewAmount(e.target.value);
-                  }}
-                />
-                <button
-                  type='button'
-                  class='btn btn-success'
-                  onClick={() => {
-                    updateAmount(val.fullname);
-                  }}
-                >
-                  Update
-                </button>
+
+                <br />
                 <br />
               </div>
             );
