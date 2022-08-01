@@ -73,15 +73,7 @@ app.post('/api/insert', (req, res) => {
 app.put('/api/update', (req, res) => {
   const fullname = req.body.fullname;
   const amount = req.body.amount;
-  // const id = req.body.ID;
-  // const streetAddress = req.body.street_address;
-  // const city = req.body.city;
-  // const state = req.body.state;
-  // const zip = req.body.zip;
-  // const email = req.body.email;
-  // const paid = req.body.paid;
-  // const dueDate = req.body.dueDate;
-  // const pastDue = req.body.pastDue;
+
   db.query(
     `UPDATE client_data SET amount = ? WHERE fullname = ?`,
     [amount, fullname],

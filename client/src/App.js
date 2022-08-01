@@ -163,7 +163,7 @@ function App() {
             }}
           />
           <input
-            type='boolean'
+            type='text'
             name='paid'
             required
             placeholder='Paid'
@@ -181,7 +181,7 @@ function App() {
             }}
           />
           <input
-            type='boolean'
+            type='text'
             name='pastDue'
             required
             placeholder='Past Due'
@@ -215,7 +215,6 @@ function App() {
                 <p>Due Date: {val.due_date}</p>
                 <p>Past Due? {val.past_due}</p>
 
-                
                 <input
                   type='number'
                   id='updateInput'
